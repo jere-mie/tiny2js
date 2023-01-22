@@ -46,6 +46,18 @@ class TinyLexer {
         while(curr < input.length){
             let char = input[curr];
 
+            // throwing away quotes
+            if(input.slice(curr, curr+3) == "/**"){
+                curr+=3;
+                while(input.slice(curr, curr+3) != "**/"){
+                    // if we reach the end without closing the comment
+                    if (curr > input.length){
+                        tokens.push({type:"ERROR", value:"EOF"});
+                    }
+                    curr+=1;
+                }
+                curr+=3;
+            }
 
             let found=false;
 
@@ -110,7 +122,7 @@ class TinyLexer {
             }
 
             // if nothing else matches we get an error
-            tokens.push({type:"ERROR", value:input[curr]});
+            tokens.push({type:"ERROR", value:`UNKNOWNSYMBOL : ${input[curr]}`});
             curr++;
        }
        return tokens;
