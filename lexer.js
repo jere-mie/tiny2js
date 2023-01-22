@@ -57,6 +57,7 @@ class TinyLexer {
                     curr+=1;
                 }
                 curr+=3;
+                char = input[curr];
             }
 
             let found=false;
@@ -80,7 +81,6 @@ class TinyLexer {
                 if(input.slice(curr, curr+key.length) == key){
                     // checking that this really is the end of a keyword
                     if(['', ' ', '\r', '\n', '\t', ',', ';', '(', ')', '+', '-', '*', '/', ':', '!'].includes(input.slice(curr+key.length, curr+key.length+1))){
-                        console.log(`===\n${key} => |${input.slice(curr+key.length, curr+key.length+1)}|\n===`);
                         curr+=key.length;
                         tokens.push({type:kwmap.get(key), value:key});
                         found=true;
