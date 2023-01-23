@@ -5,11 +5,62 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tiny2JS</title>
+
+    <link rel="stylesheet" href="static/bootstrap.min.css">
 </head>
 <body>
-<h1>Tiny2JS</h1>
-<p>An interactive transpiler form <a href="https://jlu.myweb.cs.uwindsor.ca/214/language.htm" target="_blank">TINY</a> to Javascript.</p>
+<div class="container">
+    <br><br><br>
+    <h1>Tiny2JS</h1>
+    <p>An interactive transpiler from <a href="https://jlu.myweb.cs.uwindsor.ca/214/language.htm" target="_blank">Tiny</a> to Javascript.</p>
+    <p>Currently, only the lexer is implemented, which you can test below:</p>
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Input Tiny program</h2>
+            <textarea name="inp" id="inp" rows="15" style="width: 90%;">
+/** this is a comment line in the sample program **/
+INT f2(INT x, INT y)
+BEGIN
+    INT z;
+    z := x*x - y*y;
+    RETURN z;
+END
+INT MAIN f1()
+BEGIN
+    INT x;
+    READ(x, "A41.input");
+    INT y;
+    READ(y, "A42.input");
+    INT z;
+    z := f2(x,y) + f2(y,x);
+    WRITE(z, "A4.output"); 
+END
+            </textarea>
+            <br>
+            <button class="btn btn-primary" onclick="run();">Run Lexer</button>
+        </div>
+        <div class="col-md-6">
+            <h2>Lexer output</h2>
+            <textarea name="outp" id="outp" rows="15" style="width: 90%;" readonly></textarea>
+        </div>
+    </div>
+</div>
 
-<script src="lexer.js"></script>
+<script src="static/lexer.js"></script>
+<script>
+    let lexer = new TinyLexer();
+    let inp = document.getElementById('inp');
+    let outp = document.getElementById('outp');
+    
+    let run = () => {
+        let output = "";
+        let tokens = lexer.lex(inp.value);
+        for(let token of tokens){
+            output+=JSON.stringify(token)+"\n";
+        }
+        outp.value = output;
+    }   
+</script>
+<script src="static/bootstrap.bundle.min.js"></script>
 </body>
 </html>
