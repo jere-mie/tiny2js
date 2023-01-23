@@ -58,7 +58,7 @@ END
         for(let token of tokens){
             output+=JSON.stringify(token)+"\n";
         }
-        outp.value = output;
+        outp.value = output.slice(0, -1);
     }   
 </script>
 <script src="static/bootstrap.bundle.min.js"></script>
