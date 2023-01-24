@@ -1,2 +1,3 @@
-# tiny-to-js
+# tiny2js
+
 An interactive transpiler from TINY to Javascript

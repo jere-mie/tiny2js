@@ -47,14 +47,17 @@ END
 </div>
 
 <script src="static/lexer.js"></script>
+<script src="static/parser.js"></script>
 <script>
     let lexer = new TinyLexer();
+    let parser = new TinyParser();
+    
     let inp = document.getElementById('inp');
     let outp = document.getElementById('outp');
-    
     let run = () => {
         let output = "";
         let tokens = lexer.lex(inp.value);
+        parser.parse(tokens);
         for(let token of tokens){
             output+=JSON.stringify(token)+"\n";
         }
